@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Milestones</title>
+</head>
+<body>
+    <h2>Child Development Milestones</h2>
+
+    <a href="/edit/milestoneForm">Add/Edit New Milestone</a>
+
+    <!-- Category Filter Dropdown -->
+    <form method="get" action="/milestone">
+        <label for="category">Filter by Category:</label>
+        <select id="category" name="category" onchange="this.form.submit()">
+            <option value="">All Categories</option>
+            <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}"
+                    th:selected="${cat == param.category}"></option>
+        </select>
+    </form>
+
+    <br>
+
+    <table border="1">
+        <tr>
+            <th>Age</th>
+            <th>Category</th>
+            <th>Milestones</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="rec : ${milestones}">
+            <td th:text="${rec.age}"></td>
+            <td th:text="${rec.category}"></td>
+            <td th:text="${rec.developmentMilestone}"></td>
+            <td>
+                <a th:href="@{/milestone/edit/{id}(id=${rec.id})}">Edit</a> |
+                <a th:href="@{/milestone/delete/{id}(id=${rec.id})}" onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

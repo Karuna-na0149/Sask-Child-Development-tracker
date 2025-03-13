@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Parent Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <div class="text-center">
+                    <h2 class="mb-4">👨‍👩‍👧 Welcome to Parent Dashboard</h2>
+                    <p class="text-muted">
+                        Manage your child's profile and track their milestones.
+                    </p>
+                </div>
+
+                <!-- ✅ Actions -->
+                <div class="d-grid gap-3">
+                    <a href="/child/new" class="btn btn-outline-primary">
+                        ➕ Create Child Profile
+                    </a>
+                    
+                    <a href="/child/list" class="btn btn-outline-success">
+                        📋 View Child Profiles
+                    </a>
+                    
+                    <a href="/logout" class="btn btn-outline-danger">
+                        🚪 Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

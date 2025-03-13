@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Milestone</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="text-center header">
+                <img th:src="@{/images/children.jpg}" alt="Child Image" class="img-fluid"
+                     style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+                <h2 th:text="${milestone.id == null ? 'Add New Milestone' : 'Edit Milestone'}"></h2>
+            </div>
+
+            <div class="card p-4">
+                <!--  Display Success Message -->
+                <p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
+
+                <form th:action="@{/milestone/save}" th:object="${milestone}" method="post">
+                    <table class="table table-borderless">
+                        <!--  ID (Read-Only) -->
+                        <tr>
+                            <td><label class="form-label">ID:</label></td>
+                            <td>
+                                <input type="number" class="form-control" th:field="*{id}" readonly />
+                            </td>
+                        </tr>
+
+                        <!--  Age -->
+                        <tr>
+                            <td><label class="form-label">Age:</label></td>
+                            <td>
+                                <input type="number" class="form-control" th:field="*{age}" required min="0" />
+                            </td>
+                        </tr>
+
+                        <!--  Milestone -->
+                        <tr>
+                            <td><label class="form-label">Milestone:</label></td>
+                            <td>
+                                <textarea class="form-control" th:field="*{developmentMilestone}" rows="3" required></textarea>
+                            </td>
+                        </tr>
+
+                        <!--  Category -->
+                        <tr>
+                            <td><label class="form-label">Category:</label></td>
+                            <td>
+                                <select class="form-select" th:field="*{category}" required>
+                                    <option value="">-- Select Category --</option>
+                                    <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}"></option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!--  Submit Button -->
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <button type="submit" class="btn btn-primary w-100">Save</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+                <div class="mt-3 text-center">
+                    <a href="javascript:history.back()" class="link">🔙 Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

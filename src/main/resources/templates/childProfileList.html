@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Child Profiles</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	
+	<!-- Logout Button -->
+		<div class="logout-btn">
+		    <form th:action="@{/logout}" method="post">
+		        <button type="submit" class="btn">Logout</button>
+		    </form>
+		</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card p-4">
+                <!--  Added the same child image for consistency -->
+                <div class="text-center header">
+                    <img th:src="@{/images/children.jpg}" alt="Child Image" class="img-fluid"
+                         style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+                    <h2 class="text-center mb-4">Child Profiles</h2>
+                </div>
+
+                <!--  Success Message -->
+                <p th:if="${param.success}" class="alert alert-success text-center">
+                    Profile updated successfully!
+                </p>
+
+                <!--  Table with Borders and Hover Effect -->
+                <table class="table table-bordered table-hover text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 30%;">Name</th>
+                            <th style="width: 20%;">Age</th>
+                            <th style="width: 30%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--  Loop through profiles -->
+                        <tr th:each="profile : ${profiles}">
+                            <td th:text="${profile.name}"></td>
+                            <td th:text="${profile.age}"></td>
+							<td>
+							    <div class="d-flex gap-2">
+							        <a th:href="@{/child/edit/{id}(id=${profile.id})}" class="btn btn-outline-primary btn-sm">
+							            ✏️ Edit
+							        </a>
+							        <a th:href="@{/child/delete/{id}(id=${profile.id})}" class="btn btn-outline-danger btn-sm"
+							           onclick="return confirm('Are you sure you want to delete this profile?')">
+							            ❌ Delete
+							        </a>
+							    </div>
+							</td>
+                        </tr>
+                        <!--  Display message if no profiles exist -->
+                        <tr th:if="${#lists.isEmpty(profiles)}">
+                            <td colspan="3" class="text-center">No profiles found.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!--  Centered Add Button -->
+                <div class="text-center mt-4">
+                    <a href="/child/new" class="btn btn-success">➕ Add New Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

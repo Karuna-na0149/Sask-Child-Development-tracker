@@ -1,55 +1,305 @@
-/* ✅ Set full background image */
+/*  Set full background image */
 body {
-    background-image: url('/images/rainbow.jpg'); /* ✅ Make sure path is correct */
+    background-image: url('/images/rainbow.jpg'); /*  Ensure path is correct */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
-/* ✅ Center form content vertically and horizontally */
+/*  Center content vertically and horizontally */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-/* ✅ Style for form card */
+/*  Style for card container */
 .card {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.95); /*  Increased opacity for better readability */
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 700px; /*  Increased width for larger screens */
+    transition: transform 0.2s ease;
 }
 
-/* ✅ Style headings and text */
+/*  Hover effect for card */
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/*  Style headings and text */
 h2 {
-    color: #333;
+    color: #444;
     font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-/* ✅ Style for buttons */
+/*  Input fields styling */
+.form-control {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+/*  Style for buttons */
 .btn {
     font-size: 16px;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     transition: background-color 0.2s ease;
+    width: 100%;
+    margin-top: 10px;
 }
 
-.btn-outline-primary:hover {
+/*  Primary button hover */
+.btn-primary {
     background-color: #007bff;
     color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/*  Success button hover */
+.btn-outline-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
 }
 
 .btn-outline-success:hover {
-    background-color: #28a745;
+    background-color: #218838;
+}
+
+/*  Danger button hover */
+.btn-outline-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-outline-danger:hover {
+    background-color: #c82333;
+}
+
+/*  Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/*  Table headers */
+.table th {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+/*  Table rows */
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+/*  Table hover effect */
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/*  Success alert */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/*  Error alert */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/*  Centered links and buttons */
+.text-center {
+    text-align: center;
+}
+
+/*  Links */
+.link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/*  Back button styling */
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/*  Header Styling */
+.header img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/*  For Consistency on All Pages */
+.table-dark {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+/*  Center content within the table */
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+/*  Button alignment */
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
+
+/*  Improved spacing for table rows */
+.table-hover tbody tr td {
+    padding: 14px;
+}
+
+/*  Add padding and border-radius to form elements */
+input,
+select,
+textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/*  Adjust font size for smaller screens */
+@media (max-width: 576px) {
+    .card {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px;
+    }
+}
+
+
+/*  Fix button alignment and spacing */
+td .d-flex {
+    display: flex;
+    align-items: center;
+    gap: 8px; /*  Add spacing between buttons */
+    white-space: nowrap;
+}
+
+/*  Button width consistency */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+/*  Fix for hover behavior */
+.btn-outline-primary:hover {
+    background-color: #007bff;
     color: white;
 }
 
 .btn-outline-danger:hover {
     background-color: #dc3545;
     color: white;
+}
+
+/*  Align milestones to left */
+#milestonesContainer {
+    text-align: left; /* Left-align text and checkboxes */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #444;
+}
+
+/*  Position the logout button on the top right */
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.logout-btn .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.logout-btn .btn:hover {
+    background-color: #c82333;
 }

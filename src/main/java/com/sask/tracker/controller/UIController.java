@@ -1,5 +1,6 @@
 package com.sask.tracker.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class UIController {
     //  Home page
     @GetMapping("/")
     public String index() {
-        return "index"; // Resolves to templates/index.html
+        return "login"; // Resolves to templates/index.html
     }
 
     //  Display Child Profile form
@@ -35,24 +36,47 @@ public class UIController {
         model.addAttribute("childProfile", profile);
         return "childProfile"; // Resolves to templates/childProfile.html
     }
-    
-    //  Display list of all milestones
-    @GetMapping("/view/milestone")
-    public String listRecommendations(Model model) {
-        model.addAttribute("recommendations", milestoneService.getAllMilestones());
-        return "milestone"; // Resolves to templates/milestone.html
+    @GetMapping("/milestone/list")
+    public String listMilestones(
+            @RequestParam(value = "age", required = false) Integer age,
+            @RequestParam(value = "category", required = false) String category,
+            Model model) {
+
+        List<Milestone> milestones = new ArrayList<>();
+        if (age != null && category != null) {
+            milestones = milestoneService.getMilestonesByAgeAndCategory(age, category);
+        }
+
+        List<Integer> ages = milestoneService.getDistinctAges();
+        List<String> categories = milestoneService.getAllCategories();
+
+        model.addAttribute("milestones", milestones);
+        model.addAttribute("ages", ages);
+        model.addAttribute("categories", categories);
+        model.addAttribute("selectedAge", age);
+        model.addAttribute("selectedCategory", category);
+
+        return "list_milestone";
     }
 
+    @GetMapping("/milestone/edit/{id}")
+    public String editMilestone(@PathVariable Long id, Model model) {
+        Milestone milestone = milestoneService.getMilestoneById(id).orElse(new Milestone());
+        model.addAttribute("milestone", milestone);
+        return "milestone";
+    }
+
+
     //  Display form to add/edit a milestone
-    @GetMapping("/edit/milestoneForm")
+    @GetMapping("/add/milestoneForm")
     public String showMilestoneForm(Model model, @RequestParam(value = "id", required = false) Long id) {
         Milestone milestone;
 
         if (id != null) {
-            //  Editing an existing recommendation
+            //  Editing an existing milestone
         	milestone = milestoneService.getMilestoneById(id).orElse(new Milestone());
         } else {
-            //  Creating a new recommendation, set ID as highest + 1
+            //  Creating a new milestone, set ID as highest + 1
             Long newId = milestoneService.getNextMilestoneId();
             milestone = new Milestone();
             milestone.setId(newId);

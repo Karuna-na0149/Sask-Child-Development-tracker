@@ -43,6 +43,15 @@ public class MilestoneService {
     public List<Milestone> getMilestoneForProfile(int age) {
         return milestoneRepository.findByAge(age);
     }
+    
+    //  Get all distinct ages (for dropdown)
+    public List<Integer> getAllAges() {
+        return milestoneRepository.findAll()
+                .stream()
+                .map(Milestone::getAge)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 
     //  Get Milestones by Age and Category
     public List<Milestone> getMilestonesByAgeAndCategory(int age, String category) {
@@ -72,5 +81,14 @@ public class MilestoneService {
     public Long getNextMilestoneId() {
         Long highestId = milestoneRepository.findHighestId();
         return (highestId != null) ? highestId + 1 : 1;
+    }
+    
+ //  Get all unique ages from the milestone table
+    public List<Integer> getDistinctAges() {
+        return milestoneRepository.findDistinctAges();
+    }
+    
+    public void saveAllMilestones(List<Milestone> milestones) {
+        milestoneRepository.saveAll(milestones);
     }
 }

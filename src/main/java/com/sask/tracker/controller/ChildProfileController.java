@@ -1,11 +1,13 @@
 package com.sask.tracker.controller;
 
 import com.sask.tracker.exception.EmailDeliveryException;
+import com.sask.tracker.model.ChartData;
 import com.sask.tracker.model.ChildProfile;
 import com.sask.tracker.model.Milestone;
 import com.sask.tracker.model.User;
 import com.sask.tracker.service.ChildProfileService;
 import com.sask.tracker.service.EmailService;
+import com.sask.tracker.service.MilestoneChartService;
 import com.sask.tracker.service.MilestoneService;
 import com.sask.tracker.service.RecommendationService;
 import com.sask.tracker.service.UserService;
@@ -38,6 +40,9 @@ public class ChildProfileController {
 
     @Autowired
     private EmailService emailService;
+    
+    @Autowired
+    private MilestoneChartService milestoneChartService;
 
     //  Load form with milestones grouped by category
     @GetMapping("/new")

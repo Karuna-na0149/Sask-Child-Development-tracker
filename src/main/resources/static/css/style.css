@@ -303,3 +303,14 @@ h4 {
 .logout-btn .btn:hover {
     background-color: #c82333;
 }
+
+/*  Insights Button Styling */
+.btn-outline-info {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+}
+
+.btn-outline-info:hover {
+    background-color: #138496;
+}

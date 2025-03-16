@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Milestone Insights</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ✅ Logout Button -->
+<div class="logout-btn">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn">Logout</button>
+    </form>
+</div>
+
+<div class="container mt-5">
+    <div class="card p-4">
+        <!-- ✅ Centered Image and Heading -->
+        <div class="text-center header">
+            <img th:src="@{/images/children.jpg}" alt="Child Image" class="img-fluid"
+                 style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+            <h2 class="mb-4">Milestone Insights for <span th:text="${childProfile.name}"></span></h2>
+        </div>
+
+        <!-- ✅ Success Message -->
+        <p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success text-center"></p>
+
+        <!-- ✅ Bar Chart Container -->
+        <div class="mt-4">
+            <canvas id="milestoneChart" width="400" height="200"></canvas>
+            <!-- Hidden data element to pass chart data to JS -->
+            <div id="chartData" th:text="${chartDataJson}" style="display: none;"></div>
+        </div>
+
+        <!-- ✅ List of Completed Milestones -->
+        <div class="mt-5">
+            <h4 class="text-center mb-3">Completed Milestones</h4>
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Category</th>
+                        <th>Milestone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="milestone : ${completedMilestones}">
+                        <td th:text="${milestone.category}"></td>
+                        <td th:text="${milestone.developmentMilestone}"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(completedMilestones)}">
+                        <td colspan="2">No milestones completed yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ✅ Back Button -->
+        <div class="mt-3 text-center">
+            <a href="/child/list" class="btn btn-secondary">Back to Profiles</a>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ Link to JS File -->
+<script th:src="@{/js/milestone_chart.js}"></script>
+
+</body>
+</html>

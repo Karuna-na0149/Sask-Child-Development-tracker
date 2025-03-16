@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<!-- ✅ Logout Button -->
+<!--  Logout Button -->
 <div class="logout-btn">
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="btn">Logout</button>
@@ -17,21 +17,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card p-4"> <!-- ✅ Moved card start here -->
+            <div class="card p-4"> <!--  Moved card start here -->
                 
-                <!-- ✅ Centered Image and Heading -->
+                <!--  Centered Image and Heading -->
                 <div class="text-center header">
                     <img th:src="@{/images/children.jpg}" alt="Child Image" class="img-fluid"
                          style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
                     <h2 th:text="${milestone.id == null ? 'Add New Milestone' : 'Add Milestone'}"></h2>
                 </div>
 
-                <!-- ✅ Display Success Message -->
+                <!--  Display Success Message -->
                 <p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
 
                 <form th:action="@{/milestone/save}" th:object="${milestone}" method="post">
                     <table class="table table-borderless">
-                        <!-- ✅ ID (Read-Only) -->
+                        <!--  ID (Read-Only) -->
                         <tr>
                             <td><label class="form-label">ID:</label></td>
                             <td>
@@ -39,7 +39,7 @@
                             </td>
                         </tr>
 
-                        <!-- ✅ Age -->
+                        <!--  Age -->
                         <tr>
                             <td><label class="form-label">Age:</label></td>
                             <td>
@@ -47,7 +47,7 @@
                             </td>
                         </tr>
 
-                        <!-- ✅ Milestone -->
+                        <!--  Milestone -->
                         <tr>
                             <td><label class="form-label">Milestone:</label></td>
                             <td>
@@ -55,7 +55,7 @@
                             </td>
                         </tr>
 
-                        <!-- ✅ Category -->
+                        <!--  Category -->
                         <tr>
                             <td><label class="form-label">Category:</label></td>
                             <td>
@@ -66,7 +66,7 @@
                             </td>
                         </tr>
 
-                        <!-- ✅ Submit Button -->
+                        <!--  Submit Button -->
                         <tr>
                             <td colspan="2" class="text-center">
                                 <button type="submit" class="btn btn-primary w-100">Save</button>

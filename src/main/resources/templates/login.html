@@ -10,22 +10,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <div class="card p-4"> <!-- ✅ Moved card start here -->
+            <div class="card p-4"> <!--  Moved card start here -->
 
-                <!-- ✅ Centered Image and Heading -->
+                <!--  Centered Image and Heading -->
                 <div class="text-center header">
-                    <!-- ✅ Fix for image path using Thymeleaf syntax -->
+                    <!--  Fix for image path using Thymeleaf syntax -->
                     <img th:src="@{/images/children.jpg}" alt="Child Image" class="img-fluid"
                          style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
                     <h2 class="mb-4">Welcome to Sask Child Development Tracker</h2>
                 </div>
 
-                <!-- ✅ Display error or success message -->
+                <!--  Display error or success message -->
                 <p th:if="${param.error}" class="alert alert-danger">Invalid credentials. Please try again.</p>
                 <p th:if="${param.logout}" class="alert alert-success">You have been logged out successfully.</p>
                 <p th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></p>
 
-                <!-- ✅ Form to Login -->
+                <!--  Form to Login -->
                 <form th:action="@{/user-login}" method="post">
                     <table class="table table-borderless">
                         <tr>
@@ -52,7 +52,7 @@
                     </table>
                 </form>
 
-                <!-- ✅ Links for Signup and Forgot Password -->
+                <!--  Links for Signup and Forgot Password -->
                 <div class="mt-3 text-center">
                     <a href="/signup" class="link">Don't have an account? Sign up here</a> |
                     <a href="/forgot-password" class="link">Forgot Password?</a>

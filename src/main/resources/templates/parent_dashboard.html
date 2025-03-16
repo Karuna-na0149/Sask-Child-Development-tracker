@@ -6,11 +6,24 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+	<!-- Logout Button -->
+		<div class="logout-btn">
+		    <form th:action="@{/logout}" method="post">
+		        <button type="submit" class="btn">Logout</button>
+		    </form>
+		</div>
 <div class="container">
+	
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card p-4">
+				<!-- Add children.jpg image at the top -->
+				                   <div class="text-center">
+				                       <img th:src="@{/images/children.jpg}" alt="Children" 
+				                            class="img-fluid rounded mb-3" style="max-width: 150px; border-radius: 50%;">
+				                   </div>
+
+				
                 <div class="text-center">
                     <h2 class="mb-4">👨‍👩‍👧 Welcome to Parent Dashboard</h2>
                     <p class="text-muted">
@@ -18,20 +31,18 @@
                     </p>
                 </div>
 
-                <!-- ✅ Actions -->
-                <div class="d-grid gap-3">
-                    <a href="/child/new" class="btn btn-outline-primary">
-                        ➕ Create Child Profile
-                    </a>
-                    
-                    <a href="/child/list" class="btn btn-outline-success">
-                        📋 View Child Profiles
-                    </a>
-                    
-                    <a href="/logout" class="btn btn-outline-danger">
-                        🚪 Logout
-                    </a>
-                </div>
+				<!--  Increased Gap Between Buttons -->
+				             <div class="d-grid">
+				                 <a href="/child/new" class="btn btn-outline-success mb-3">
+				                     ➕ Create Child Profile
+				                 </a>
+								 
+								 &nbsp;&nbsp;
+				                 
+				                 <a href="/child/list" class="btn btn-outline-success">
+				                     📋 View Child Profiles
+				                 </a>
+				             </div>
             </div>
         </div>
     </div>

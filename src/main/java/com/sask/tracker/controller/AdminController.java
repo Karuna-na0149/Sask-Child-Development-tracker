@@ -9,7 +9,7 @@ public class AdminController {
 
     @GetMapping("/admin/dashboard")
     public String adminDashboard(Model model) {
-        model.addAttribute("message", "Welcome to the Admin Dashboard");
+        model.addAttribute("message", "");
         return "admin_dashboard";
     }
 }

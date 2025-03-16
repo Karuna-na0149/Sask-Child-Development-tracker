@@ -22,4 +22,7 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
     //  Find the highest existing ID in the table
     @Query("SELECT MAX(m.id) FROM Milestone m")
     Long findHighestId();
+    
+    @Query("SELECT DISTINCT m.age FROM Milestone m ORDER BY m.age ASC")
+    List<Integer> findDistinctAges();
 }

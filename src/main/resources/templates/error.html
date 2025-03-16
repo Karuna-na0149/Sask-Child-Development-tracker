@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!--  Logout Button -->
+<div class="logout-btn">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <div class="text-center">
+                    <img th:src="@{/images/children.jpg}" alt="Error Image" class="img-fluid" 
+                         style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+                </div>
+
+                <!--  Error Message -->
+                <h2 class="text-center text-danger">Oops! Something went wrong.</h2>
+                <p class="text-center" th:text="${errorMessage}"></p>
+
+                <!--  Redirect to Dashboard -->
+                <div class="text-center mt-3">
+                    <a th:href="${dashboardLink}" class="btn btn-primary">
+                        <span th:text="${dashboardText}"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/milestone")
@@ -34,13 +34,6 @@ public class MilestoneController {
         return "milestones";
     }
 
-    //  Show form for adding a new milestones
-    @GetMapping("/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("milestone", new Milestone());
-        model.addAttribute("categories", milestoneService.getAllCategories()); // Populate categories in the form
-        return "recommendation_form";
-    }
 
     //  Save or update a milestones
     @PostMapping("/save")
@@ -78,21 +71,58 @@ public class MilestoneController {
     }
 
 
-    //  Show edit form for a milestones
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Milestone> milestone = milestoneService.getMilestoneById(id);
-        model.addAttribute("milestone", milestone.orElse(new Milestone()));
-        model.addAttribute("categories", milestoneService.getAllCategories()); // Populate categories in the edit form
-        return "recommendation_form";
+    //  Populate the form during update based on age and category
+    @GetMapping("/edit")
+    public String showEditForm(@RequestParam(required = false) Integer age,
+                               @RequestParam(required = false) String category,
+                               Model model) {
+
+        Milestone milestone = milestoneService.getMilestonesByAgeAndCategory(age, category)
+                .stream()
+                .findFirst()
+                .orElse(new Milestone());
+
+        model.addAttribute("milestone", milestone);
+        model.addAttribute("categories", milestoneService.getAllCategories());
+        model.addAttribute("ages", milestoneService.getAllAges());
+
+        return "milestone";
     }
 
-    //  Delete a milestones
     @GetMapping("/delete/{id}")
-    public String deleteRecommendation(@PathVariable Long id) {
-    	milestoneService.deleteMilestone(id);
+    public String deleteMilestone(@PathVariable Long id,
+                                  RedirectAttributes redirectAttributes) {
+        milestoneService.deleteMilestone(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Milestone deleted successfully!");
         return "redirect:/view/milestone";
     }
+    
+    @PostMapping("/save/{id}")
+    public String saveMilestone(
+            @PathVariable Long id,
+            @ModelAttribute Milestone milestone,
+            RedirectAttributes redirectAttributes) {
 
+        //  Assign ID manually since it comes from URL
+        milestone.setId(id);
+        milestoneService.saveMilestone(milestone);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Milestone updated successfully!");
+
+        //  Redirect back to the same form with age and category pre-selected
+        return "redirect:/view/milestone?age=" + milestone.getAge() + "&category=" + milestone.getCategory();
+    }
+    
+    @PostMapping("/saveAll")
+    public String saveAllMilestones(
+            @ModelAttribute("milestones") List<Milestone> milestones,
+            RedirectAttributes redirectAttributes) {
+
+        milestoneService.saveAllMilestones(milestones);
+        redirectAttributes.addFlashAttribute("successMessage", "All milestones updated successfully!");
+
+        //  Redirect back to the milestone form after saving
+        return "redirect:/view/milestone";
+    }
     
 }

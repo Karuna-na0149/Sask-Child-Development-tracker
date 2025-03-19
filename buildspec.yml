@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - echo "Installing dependencies..."
+      - chmod +x mvnw
+      - ./mvnw clean install
+  build:
+    commands:
+      - echo "Building the application..."
+      - ./mvnw package
+  post_build:
+    commands:
+      - echo "Build completed successfully"
+artifacts:
+  files:
+    - target/*.jar
+  discard-paths: yes

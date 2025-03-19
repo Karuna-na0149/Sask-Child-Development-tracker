@@ -3,19 +3,21 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      java: corretto17
     commands:
-      - echo "Installing dependencies..."
-      - chmod +x mvnw
-      - ./mvnw clean install
+      - echo Installing dependencies...
+      - mvn clean install
   build:
     commands:
-      - echo "Building the application..."
-      - ./mvnw package
+      - echo Building the JAR file...
+      - mvn package
   post_build:
     commands:
-      - echo "Build completed successfully"
+      - echo Build complete.
+      - echo Uploading JAR to S3...
+      - aws s3 cp target/Sask-Child-Development-tracker.jar s3://sask-child-tracker-artifacts/
+
 artifacts:
   files:
-    - target/*.jar
+    - target/Sask-Child-Development-tracker.jar
   discard-paths: yes
